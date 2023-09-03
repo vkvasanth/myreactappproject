@@ -1,0 +1,18 @@
+Link:visited{
+    color: aqua;
+}
+Link:link
+{
+    color: black;
+}
+Link{
+    text-decoration: none;
+}
+Link:active
+{
+    color: yellowgreen;
+}
+Link:hover{
+    
+    color: blueviolet;
+}
