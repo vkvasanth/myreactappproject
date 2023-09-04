@@ -3,10 +3,14 @@ import productService from "../services/productservices";
 import { Link } from "react-router-dom"; 
 import{BsFillPencilFill,BsFillTrash3Fill} from "react-icons/bs"
 function Product(){
+     let [user,setUser]=useState({})
+     let [username,setUsername]=useState('')
   let [products,setProducts]=useState([]);
   let [authorities,setAuthorities]=useState('')
   const [searchTerm,setSearchTerm]=useState('')
 useEffect(()=>{
+    setUsername(localStorage.getItem("username"))
+  setAuthorities(localStorage.getItem("authorities"))
    getAllProducts()
 },[])
 function getAllProducts(){
@@ -28,6 +32,7 @@ products=products.filter(
 (p)=>p.name.toLowerCase().includes(searchTerm.toLowerCase()) )
    
 const deleteProduct=(id)=>{
+    if(window.confirm('Do you want to delete this product')){
     productService.deleteProduct(id).then(response=>{
         console.log(response.status);
         alert("Product delete 😜successful")
@@ -36,12 +41,14 @@ const deleteProduct=(id)=>{
         console.log(e);
     })
 }
+}
 return(<>
    Search <input type="text" name="search" onChange={handleChange}> 
 
-   </input>
+   </input><br></br>
    
     <table className="table table-striped">
+      
       
         <thead>
             <tr>
@@ -65,23 +72,19 @@ return(<>
                     <td><Link to={`/viewproduct/${p.id}`}>{p.name}</Link></td>
                     <td>{p.price}</td>
                     <td>{p.quantity}</td>
-                    {authorities==="Admin"?(
+                    {authorities==="Admin"?
                    
                     <td>
                     <Link to={`/edit/${p.id}`}className="btn btn-primary">
                    < BsFillPencilFill></BsFillPencilFill>   update</Link>
-                   </td>
-                 ):(
+                   </td>:
                     ""
-                 )}
-                 {authorities==="Admin"?(
+                 }
+                 {authorities==="Admin"?
                     <td>
                 <button className="btn btn-danger"
                 onClick={()=>{deleteProduct(p.id)}}> <BsFillTrash3Fill></BsFillTrash3Fill> Remove</button>
-                </td>
-               ):(
-                ""
-               )
+                </td>: ""
                 }
                 </tr>
             );

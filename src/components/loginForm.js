@@ -31,7 +31,13 @@ function LoginForm({setUsername,setAuthorities}){
         localStorage.setItem("password",data.password)
         Customerservice.login(data).then(response=>{
             alert('Success')
-            localStorage.setItem("username",response.data.username)
+            // alert('response.data')
+            // console.log('response.data');
+            // let token=response.data
+            // console.log(parseJwt(token));
+            // let userData=parseJwt(token);
+            // localStorage.setItem('token',JSON.stringify(token))
+            // localStorage.setItem("username",response.data.username)
             localStorage.setItem("authorities",response.data.authorities[0].authority)
             setUsername(response.data.username)
             setAuthorities(response.data.authorities[0].authority)
@@ -61,19 +67,19 @@ function LoginForm({setUsername,setAuthorities}){
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email"
                 placeholder="enter a email" onChange={handleChange}
-                values={formValues.email}></input>
+                value={formValues.email}></input>
                 <b style={{color:'red'}}>{formErrors.email}</b>
                 </div>
                 <div>
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password"
                 placeholder="enter a password" onChange={handleChange}
-                values={formValues.password}></input>
+                value={formValues.password}></input>
                  <b style={{color:'red'}}>{formErrors.password}</b>
                 </div>
                 <button>onSubmit</button>
             </form>
         </div>
-    )
+    );
 }
 export default LoginForm;

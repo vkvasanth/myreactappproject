@@ -5,7 +5,7 @@ import productService from "../services/productservices";
 function Addproduct(){
     let navigate=useNavigate();
     const {id}=useParams();
-    const initialValues={name:"",price:"",quantity:""}
+    const initialValues={id:"",name:"",price:0,quantity:0}
     const [formValues,setFormValues]=useState(initialValues)
     const [formErrors,setFormErrors]=useState({})
     const  [isSubmitted, setIsSubmitted]=useState(false)
@@ -30,12 +30,15 @@ function Addproduct(){
         console.log('data.id'+data.id) 
         alert(data)
         if(data.id===0){
+            console.log(data);
         productService.create(data)
         .then(response =>{
          console.log(response.status);
+         alert('product added successfully')
          navigate('/products')
         }) 
         .catch(e =>{
+            alert(e.message)
          console.log(e.message);
         })
      }
@@ -55,10 +58,10 @@ function Addproduct(){
     
         if(!formValues.name)
         errors.name='name is required'
-        if(!formValues.price)
-        errors.price='price is required'
-        if(!formValues.quantity)
-        errors.quantity='quantity is required'
+        if(!formValues.price<0)
+        errors.price='price is negative'
+        if(!formValues.quantity<0)
+        errors.quantity='quantity is negative'
         console.log(errors);
     return errors;
     }
@@ -102,21 +105,24 @@ else return 'Add'
         <h1 style={{backgroundColor:'rosybrown'}}>{formTitle()}</h1>
                 <div>
                 <label htmlFor="name"><b><emp>Name</emp></b></label>
-                <input type="text" name="name"
+                <input type="text" name="name" className="form-control"
+                    style={{width:'800px'}}
                 placeholder="enter a name" onChange={handleChange}
                 value={formValues.name}></input>
                  <b style={{color:'red'}}>{formErrors.name}</b>
                 </div>
                 <div>
                 <label htmlFor="price"><b><emp>Price</emp></b></label>
-                <input type="text" name="price"
+                <input type="text" name="price" className="form-control"
+                    style={{width:'800px'}}
                 placeholder="enter a price" onChange={handleChange}
                 value={formValues.price}></input>
                  <b style={{color:'red'}}>{formErrors.price}</b>
                 </div>
                 <div>
                 <label htmlFor="quantity"><b><emp>Quantity</emp></b></label>
-                <input type="text" name="quantity"
+                <input type="text" name="quantity" className="form-control"
+                    style={{width:'800px'}}
                 placeholder="enter a quantity" onChange={handleChange}
                 value={formValues.quantity}></input>
                  <b style={{color:'red'}}>{formErrors.quantity}</b>

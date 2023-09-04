@@ -12,7 +12,7 @@ import ViewProduct from './Viewproduct';
 import Counter from './components/useReduceDemo';
 import BankAccount from './components/bankaccount';
 import Registation from './components/registationForm';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 import Logout from './components/logout';
 
 function App() {
@@ -46,6 +46,8 @@ function App() {
   return(
  
     <div className='App'>
+      {typeof authorities}<br/>
+      { authorities}
   <BrowserRouter>
     <nav className='nav navbar-expand navbar-dark'>
       <div className='nav-link' style={{backgroundColor:"gold"}}>
@@ -56,16 +58,16 @@ function App() {
        </div> : <div className="nav-link">
         <Link to ="/logout">logout</Link>
      </div>}
-     {!username ? <div className='nav-link' style={{backgroundColor:"coral"}}>
+     {!username ?
+     <div className='nav-link' style={{backgroundColor:"coral"}}>
        <Link  to="/Registation">Registation</Link>
      </div>:''
-  }
+      }
   {authorities==='Admin'?
      <div className='nav-link' style={{backgroundColor:"rosybrown"}}>
        <Link to="/productForm">Addproduct</Link>
-
      </div> :''
-}
+        }
      { authorities==='User'?
       <div className='nav-link'>Offers</div>:''}
       {  username? <div className='nav-link'>
@@ -94,14 +96,14 @@ function App() {
         <Route path='/viewproduct/:id' element={<ViewProduct/>}></Route>
         <Route path='/useReduceDemo' element={<Counter/>}></Route>
         <Route path='/Registation' element={<Registation/>}></Route>
-        <Route path='logout' element={<Logout setUsername={setUsername}
+        <Route path='/logout' element={<Logout setUsername={setUsername}
         setAuthorities={setAuthorities}/>}></Route>
       
       </Routes>
       
    </BrowserRouter>
   
-    <BankAccount></BankAccount>
+    {/* //<BankAccount></BankAccount> */}
  </div>
   );
 }

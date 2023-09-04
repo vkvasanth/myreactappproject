@@ -35,25 +35,25 @@ function Registation(){
                     <label html="firstname">FirstName</label>
                     <input type="text" name="firstname"
                     placeholder="enter a firstname" onChange={handleChange}
-                    values={formValues.values}></input>
+                    values={formValues.firstname}></input>
                 </div>
                 <div>
                     <label html="lastname">LastName</label>
                     <input type="text" name="lastname"
                     placeholder="enter a lastname" onChange={handleChange}
-                    values={formValues.lastname}></input>
+                    value={formValues.lastname}></input>
                 </div>
                 <div>
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email"
                 placeholder="enter a email" onChange={handleChange}
-                values={formValues.email}></input>
+                value={formValues.email}></input>
                 </div>
                 <div>
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password"
                 placeholder="enter a password" onChange={handleChange}
-                values={formValues.password}></input>
+                value={formValues.password}></input>
                 </div>
                 <button>onSubmit</button>
             </form>
